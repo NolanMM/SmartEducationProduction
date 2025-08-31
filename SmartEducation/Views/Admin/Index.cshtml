@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Admin Dashboard</h1>
+        <p class="lead">System management and overview.</p>
+    </div>
+    <hr />
+
+    <div class="row pt-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Users</h5>
+                    <p class="card-text">Create, edit, delete, and assign roles to all users in the system.</p>
+                    <a asp-action="Users" class="btn btn-primary bg-black" style="border-color:black">Go to Users</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Organizations</h5>
+                    <p class="card-text">Add new organizations or edit details of existing ones.</p>
+                    <a asp-action="Organizations" class="btn btn-primary bg-black" style="border-color:black">Go to Organizations</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Configure System</h5>
+                    <p class="card-text">Modify Server/System Configuration</p>
+                    <a asp-action="Configuration" asp-controller="Admin" class="btn btn-primary bg-black" style="border-color:black">Go to Configuration</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pt-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Server Insights</h5>
+                    <p class="card-text">Dashboard for Insights of the Server</p>
+                    <a asp-action="Dashboard" asp-controller="Admin" class="btn btn-primary bg-black" style="border-color:black">Go to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

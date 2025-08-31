@@ -1,0 +1,31 @@
+﻿@model SmartEducation.Entities.Organization
+@{
+    ViewData["Title"] = "Organization Dashboard";
+}
+
+<div class="container mt-4">
+    <h1 class="display-4">@Model.Name Dashboard</h1>
+    <p class="lead">Manage your organization's users and settings.</p>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Manage My Users</h5>
+                    <p class="card-text">View, edit, and manage the users within your organization.</p>
+                    <a asp-action="MyUsers" class="btn btn-primary">My Users</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Edit Organization Info</h5>
+                    <p class="card-text">Update the details for @Model.Name.</p>
+                    <a asp-action="EditOrganizationInfo" asp-route-id="@Model.Id" class="btn btn-secondary">Edit Info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

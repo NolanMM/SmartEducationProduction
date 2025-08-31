@@ -1,0 +1,129 @@
+﻿@model ActivityRecommendation
+
+@{
+    ViewData["Title"] = "Recommendation Details";
+}
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-black text-white py-4">
+            @* <h2 class="mb-0">@Model.Summary</h2> *@
+            <div class="row g-0 align-items- mb-2">
+                <div class="col text-start">
+                    <h2 class="mb-0 pb-2">Original Request</h2>
+                    <h5 class="mb-0">"@Model.UserPrompt"</h5>
+                </div>
+                <div class="col text-end">
+                    <p class="mb-0 pt-3">Date Requested: @Model.DateTimeRequest</p>
+                    <p class="mb-0 pt-1">Total Number of Token: @Model.TotalTokens</p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="card-body p-4 p-md-5">
+            <div class="mb-4">
+                <h4 class="text-muted">Summary</h4>
+                @* <p class="fst-italic">"@Model.UserPrompt"</p> *@
+                <p class="fst-italic">@Model.Summary</p>
+
+            </div>
+
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-lg-6">
+                    <h5 class="mt-4">Engineer Connection</h5>
+                    <p>@Model.EngineerConnection</p>
+
+                    <h5 class="mt-4">Learning Objectives</h5>
+                    <ul>
+                        @foreach (var item in Model.LearningObjectives)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+
+                    <h5 class="mt-4">Education Standards</h5>
+                    <ul>
+                        @foreach (var item in Model.EducationStandards)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+
+                    <h5 class="mt-4">Material Lists</h5>
+                    <ul>
+                        @foreach (var item in Model.MaterialLists)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+
+                    <h5 class="mt-4">Worksheets and Attachments</h5>
+                    <ul>
+                        @foreach (var item in Model.WorksheetsAndAttachments)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-lg-6">
+                    <h5 class="mt-4">Introduction & Motivation</h5>
+                    <p>@Model.IntroductionMotivation</p>
+
+                    <h5 class="mt-4">Assessments</h5>
+                    <ul>
+                        @foreach (var item in Model.Assessments)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+
+                    <h5 class="mt-4 text-danger">Safety Issues</h5>
+                    <p>@Model.SafetyIssues</p>
+
+                    <h5 class="mt-4">Troubleshooting Tips</h5>
+                    <ul>
+                        @foreach (var item in Model.TroubleshootingTips)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+
+                    <h5 class="mt-4">Activity Extensions</h5>
+                    <ul>
+                        @foreach (var item in Model.ActivityExtensions)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+
+                    <h5 class="mt-4">Activity Scaling</h5>
+                    <ul>
+                        @foreach (var item in Model.ActivityScaling)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Procedure Section -->
+            <div>
+                <h5 class="mt-4">Procedure</h5>
+                <ol>
+                    @foreach (var step in Model.Procedure)
+                    {
+                        <li class="mb-2">@step</li>
+                    }
+                </ol>
+            </div>
+        </div>
+        <div class="card-footer text-center py-3">
+            <a asp-action="History" class="btn btn-secondary">Back to History</a>
+        </div>
+    </div>
+</div>

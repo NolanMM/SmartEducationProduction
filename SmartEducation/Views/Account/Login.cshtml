@@ -1,0 +1,54 @@
+﻿@model LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+<div class="bg-body-tertiary">
+    <div class="container d-flex flex-column justify-content-center min-vh-90 py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+
+                <div class="card shadow-lg border-0 rounded-4 fade-in-card">
+                    <div class="card-header bg-white text-center py-4 border-0">
+                        <i class="bi bi-person-circle fs-1 text-dark"></i>
+                        <h1 class="fw-light mt-2 mb-0 pt-4 pb-0"><b>Sign In</b></h1>
+                    </div>
+
+                    <div class="card-body pb-4 p-md-5">
+                        <form method="post" asp-controller="Account" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl">
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="Username" class="form-control" placeholder="Username" required>
+                                <label asp-for="Username"></label>
+                                <span asp-validation-for="Username" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+                                <label asp-for="Password"></label>
+                                <span asp-validation-for="Password" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-check form-switch mb-4">
+                                <input asp-for="RememberMe" class="form-check-input">
+                                <label asp-for="RememberMe" class="form-check-label"></label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-dark btn-lg fw-semibold py-2">Log In</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer text-center bg-white py-3 border-0">
+                        <small>
+                            Not registered? <a asp-controller="Account" asp-action="Register" style="color:black">Create an account</a>
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid px-4 py-5 text-center bg-body-tertiary">
+    <h1 class="display-4 fw-bold py-5">Smarter Education, Brighter Futures</h1>
+    <div class="col-lg-7 mx-auto">
+        <p class="lead my-4 pb-4">
+            Instantly generate engaging, standards-aligned educational activities tailored to your needs. Save time on planning and more time on teaching.
+        </p>
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg px-4 gap-3 bg-black" style="border-color:black">Get Started for Free</a>
+                <a href="#features" class="btn btn-outline-secondary btn-lg px-4">Learn More</a>
+            </div>
+        }
+        else
+        {
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a asp-controller="ActivityRecommendation" asp-action="Index" class="btn btn-primary btn-lg px-4 gap-3 bg-black" style="border-color:black">Generate a New Activity</a>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-light">How It Works</h2>
+        <p class="lead text-body-secondary pb-4">Create amazing learning activities in three simple steps.</p>
+    </div>
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="p-4">
+                <i class="bi bi-pencil-square fs-1 text-primary"></i>
+                <h4 class="fw-normal mt-3">1. Describe</h4>
+                <p class="text-body-secondary">Simply describe the lesson or activity you have in mind. Specify the subject, age, and any key concepts.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4">
+                <i class="bi bi-magic fs-1 text-primary"></i>
+                <h4 class="fw-normal mt-3">2. Generate</h4>
+                <p class="text-body-secondary">Our AI-powered engine instantly crafts a detailed, creative, and effective lesson plan for you.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4">
+                <i class="bi bi-book-half fs-1 text-primary"></i>
+                <h4 class="fw-normal mt-3">3. Teach</h4>
+                <p class="text-body-secondary">Receive a complete, ready-to-use activity, including objectives, materials, and assessments.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="features" class="bg-body-tertiary">
+    <div class="container px-4 py-5">
+        <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+            <div class="col d-flex flex-column align-items-start gap-2">
+                <h2 class="fw-bold text-body-emphasis">Designed for Modern Educators and Parents</h2>
+                <p class="text-body-secondary">Our platform is packed with features to make your life easier and your teaching more effective.</p>
+            </div>
+            <div class="col">
+                <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">AI-Powered</h4>
+                        <p class="text-body-secondary">Leverage cutting-edge AI to save hours of prep time.</p>
+                    </div>
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-check2-circle"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">Standards-Aligned</h4>
+                        <p class="text-body-secondary">Activities are aligned with key educational standards.</p>
+                    </div>
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-person-video3"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">For Everyone</h4>
+                        <p class="text-body-secondary">Perfect for teachers, tutors, and homeschooling parents.</p>
+                    </div>
+                    <div class="col d-flex flex-column gap-2">
+                        <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <i class="bi bi-gear-wide-connected"></i>
+                        </div>
+                        <h4 class="fw-semibold mb-0">Fully Customizable</h4>
+                        <p class="text-body-secondary">Easily tweak and adapt any generated activity to fit your style.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-light">What Our Users Are Saying</h2>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card h-100 border-0">
+                <div class="card-body text-center">
+                    <p class="fst-italic">"This platform is a game-changer. I've saved countless hours on lesson planning and my students are more engaged than ever."</p>
+                </div>
+                <div class="card-footer bg-white border-0 text-center">
+                    <h6 class="mb-0">Sarah J.</h6>
+                    <small class="text-body-secondary">4th Grade Teacher</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100 border-0">
+                <div class="card-body text-center">
+                    <p class="fst-italic">"As a homeschooling parent, SmartEducation gives me the confidence that my children's activities are effective and standards-aligned."</p>
+                </div>
+                <div class="card-footer bg-white border-0 text-center">
+                    <h6 class="mb-0">Michael B.</h6>
+                    <small class="text-body-secondary">Homeschooling Parent</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100 border-0">
+                <div class="card-body text-center">
+                    <p class="fst-italic">"The activity generator is incredibly intuitive and the quality of the content it produces is consistently excellent. Highly recommended!"</p>
+                </div>
+                <div class="card-footer bg-white border-0 text-center">
+                    <h6 class="mb-0">David L.</h6>
+                    <small class="text-body-secondary">Education Coordinator</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-body-tertiary">
+    <div class="container text-center py-5">
+        <h2 class="fw-light">Ready to Transform Your Teaching?</h2>
+        <p class="lead text-body-secondary col-lg-8 mx-auto">
+            Join thousands of educators and parents who are creating amazing learning experiences with SmartEducation.
+        </p>
+        <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg mt-3 bg-black" style="border-color:black">Sign Up For Free</a>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@model ConfigurationViewModel
+@{
+    ViewData["Title"] = "System Configuration";
+}
+
+<div class="container mt-4">
+    <h1 class="display-4">System Configuration</h1>
+    <p class="lead">Modify system-wide environment variables. Changes are saved to the <code>.env</code> file in the project root.</p>
+    <hr />
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Environment Settings
+                </div>
+                <div class="card-body">
+                    <form asp-action="Configuration">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="SENDER_EMAIL" class="form-label"></label>
+                            <input asp-for="SENDER_EMAIL" class="form-control" />
+                            <span asp-validation-for="SENDER_EMAIL" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SMTP_PASSWORD" class="form-label"></label>
+                            <div class="input-group">
+                                <input asp-for="SMTP_PASSWORD" class="form-control" type="password" id="smtpPassword" value="@Model.SMTP_PASSWORD" />
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('smtpPassword')">Show</button>
+                            </div>
+                            <span asp-validation-for="SMTP_PASSWORD" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="OPENAI_API_KEY" class="form-label"></label>
+                            <div class="input-group">
+                                <input asp-for="OPENAI_API_KEY" class="form-control" type="password" id="apiKey" value="@Model.OPENAI_API_KEY"/>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('apiKey')">Show</button>
+                            </div>
+                            <span asp-validation-for="OPENAI_API_KEY" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="OPEN_AI_MODEL" class="form-label"></label>
+                            <select asp-for="OPEN_AI_MODEL" asp-items="@Model.AvailableModels" class="form-select">
+                            </select>
+                            <span asp-validation-for="OPEN_AI_MODEL" class="text-danger"></span>
+                        </div>
+                        <div class="row g-0 align-items- mb-2 pt-4">
+                            <div class="col text-start">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div> 
+                            <div class="col text-end">
+                                <a class="btn btn-danger" asp-action="Index" asp-controller="Admin">Return</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function togglePasswordVisibility(fieldId) {
+            const input = document.getElementById(fieldId);
+            const button = input.nextElementSibling;
+            if (input.type === 'password') {
+                input.type = 'text';
+                button.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                button.textContent = 'Show';
+            }
+        }
+    </script>
+}

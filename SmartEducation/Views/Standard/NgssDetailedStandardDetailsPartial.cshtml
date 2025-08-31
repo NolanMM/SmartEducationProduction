@@ -1,0 +1,33 @@
+﻿@model NGSS_Detailed_Standard
+
+@if (Model != null)
+{
+    <h4>@Model.Title_NGSS_Standard</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">Matter and its Interactions</dt>
+        <dd class="col-sm-8">@Model.Matter_Interactions</dd>
+
+        <dt class="col-sm-4">Science and Engineering Practices</dt>
+        <dd class="col-sm-8">@Model.Science_Engineering_Practices</dd>
+
+        <dt class="col-sm-4">Disciplinary Core Ideas</dt>
+        <dd class="col-sm-8">@Model.Disciplinary_Core_Ideas</dd>
+
+        <dt class="col-sm-4">Crosscutting Concepts</dt>
+        <dd class="col-sm-8">@Model.Crosscutting_Concepts</dd>
+
+        <dt class="col-sm-4">Connections to Other DCI</dt>
+        <dd class="col-sm-8">@Model.Connections_To_Other_DCI</dd>
+
+        <dt class="col-sm-4">Common Core State Standards Connections</dt>
+        <dd class="col-sm-8">@Model.Common_Core_State_Standards_Connections</dd>
+
+        <dt class="col-sm-4">Articulation of DCIs across Grade-Levels</dt>
+        <dd class="col-sm-8">@Model.Articulation_of_DCIs_across_grade_levels</dd>
+    </dl>
+}
+else
+{
+    <p>Details not found.</p>
+}

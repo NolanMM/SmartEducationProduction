@@ -1,0 +1,117 @@
+﻿@model ManageOrganizationUsersViewModel
+
+@{
+    ViewData["Title"] = "Manage Users for " + Model.OrganizationName;
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<h4>Current Organization Admin: <span class="text-primary">@(Model.OrganizationAdminEmail ?? "None Assigned")</span></h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Current Members
+            </div>
+            <div class="card-body">
+                @if (Model.Members.Any())
+                {
+                    <table class="table">
+                        <tbody>
+                            @foreach (var user in Model.Members)
+                            {
+                                <tr>
+                                    <td>@user.Email</td>
+                                    <td class="text-end">
+                                        @if (user.Id == Model.OrganizationAdminId)
+                                        {
+                                            <span class="badge bg-success">Admin</span>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="AssignOrgAdminRole" method="post" class="d-inline">
+                                                <input type="hidden" name="organizationId" value="@Model.OrganizationId" />
+                                                <input type="hidden" name="userId" value="@user.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-success">Make Admin</button>
+                                            </form>
+                                        }
+                                        <form asp-action="RemoveUserFromOrganization" method="post" class="d-inline ms-2">
+                                            <input type="hidden" name="organizationId" value="@Model.OrganizationId" />
+                                            <input type="hidden" name="userId" value="@user.Id" />
+                                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>This organization has no members.</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#addExisting">Add Existing User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#createNew">Register New User</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body tab-content">
+                <div class="tab-pane active" id="addExisting">
+                    <h5 class="card-title">Add User to Organization</h5>
+                    <form asp-action="AddUserToOrganization" method="post">
+                        <input type="hidden" name="organizationId" value="@Model.OrganizationId" />
+                        <div class="form-group mb-3">
+                            <label for="userIdToAdd" class="control-label">Select User to Add</label>
+                            <select name="userIdToAdd" class="form-control" asp-items="Model.UsersNotInOrg">
+                                <option value="">-- Select a User --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Add User" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="createNew">
+                    <h5 class="card-title">Create and Add New User</h5>
+                    <form asp-action="CreateUserInOrganization" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="OrganizationId" />
+                        <div class="form-group mb-3">
+                            <label asp-for="NewUserEmail" class="control-label"></label>
+                            <input asp-for="NewUserEmail" class="form-control" />
+                            <span asp-validation-for="NewUserEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="NewUserPassword" class="control-label"></label>
+                            <input asp-for="NewUserPassword" class="form-control" type="password" />
+                            <span asp-validation-for="NewUserPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create and Add" class="btn btn-success" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Organizations" class="btn btn-secondary">Back to Organizations List</a>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+}

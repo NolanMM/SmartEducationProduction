@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Activity Recommendation";
+}
+
+<div class="bg-body-tertiary">
+    <div class="container d-flex flex-column justify-content-center min-vh-90 py-4">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-9">
+                <div class="card shadow-lg border-0 rounded-4 fade-in-card">
+                    <div class="card-header bg-primary  bg-black text-white text-center py-4 border-0">
+                        <h1 class="fw-light mb-0"><b>Activity Generator</b></h1>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <p class="lead text-center text-body-secondary mb-4">
+                            Describe the educational activity you need. Provide details like <b>subject</b>, <b>age group</b>, and desired <b>learning outcomes</b> for the best results.
+                        </p>
+
+                        <div class="text-center mb-4">
+                            <small class="text-muted">For example: "A 20-minute science activity for 8-year-olds about gravity using household items."</small>
+                        </div>
+
+                        <form id="recommendationForm" asp-action="GetRecommendation" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-floating mb-3">
+                                <textarea id="userPrompt" name="userPrompt" class="form-control" placeholder="Enter your prompt here" rows="6" required></textarea>
+                                <label for="userPrompt">Your Detailed Prompt</label>
+                            </div>
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                            <div class="d-grid mt-4 ">
+                                <button id="submitButton" type="submit" class="btn btn-primary  bg-black btn-lg fw-semibold py-3" style="border-color:black">
+                                    <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                                    <span class="button-text ">Generate Recommendation</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer text-center bg-white py-3 border-0">
+                        <a asp-action="History" class="link-secondary text-decoration-none"><i class="bi bi-clock-history me-1"></i> View My Recommendation History</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // This script provides feedback to the user on form submission
+        document.getElementById('recommendationForm').addEventListener('submit', function () {
+            const submitButton = document.getElementById('submitButton');
+            const spinner = submitButton.querySelector('.spinner-border');
+            const buttonText = submitButton.querySelector('.button-text');
+
+            // Disable button to prevent multiple submissions
+            submitButton.disabled = true;
+
+            // Show spinner and change text
+            spinner.classList.remove('d-none');
+            buttonText.textContent = 'Generating...';
+        });
+    </script>
+}

@@ -1,0 +1,295 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Server Insights";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<div class="container mt-4">
+    <h1 class="display-4">Server Insights</h1>
+    <p class="lead">An overview of system activity and key metrics.</p>
+    <hr />
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><b>Total Users</b></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalUsers</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><b>Total Organizations</b></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalOrganizations</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1"><b>API Tokens Used</b></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@(Model.TotalApiTokensUsed?.ToString("N0") ?? "0")</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-robot fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"><b>Recommendations</b></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalRecommendations.ToString("N0")</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-lightbulb fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1"><b>Registered Kids</b></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalKidsRegistered</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-child fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1"><b>NGSS Standards</b></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalNgssStandards.ToString("N0")</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-book fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-dark shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1"><b>Grade Standards</b></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalGradeStandards.ToString("N0")</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"><b>Recommendations (Last 7 Days)</b></h6>
+                </div>
+                <div class="card-body" style="height:335px">
+                    <canvas id="recommendationsChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"><b>User Role Distribution</b></h6>
+                </div>
+                <div class="card-body">
+                    <canvas id="userRolesChart"></canvas>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <div class="row pb-4">
+        <div class="col-lg-12">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-warning">API Token Usage (Last 7 Days)</h6>
+                </div>
+                <div class="card-body" style="height:300px">
+                    <canvas id="tokensChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Organizations by User Count</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Organization Name</th>
+                                    <th>Number of Users</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var org in Model.OrganizationUserCounts)
+                                {
+                                    <tr>
+                                        <td>@org.OrganizationName</td>
+                                        <td>@org.UserCount</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Simple styling for the stat cards */
+    .card .border-left-primary {
+        border-left: .25rem solid #4e73df !important;
+    }
+
+    .card .border-left-success {
+        border-left: .25rem solid #1cc88a !important;
+    }
+
+    .card .border-left-info {
+        border-left: .25rem solid #36b9cc !important;
+    }
+
+    .card .border-left-warning {
+        border-left: .25rem solid #f6c23e !important;
+    }
+
+    .card .border-left-danger {
+        border-left: .25rem solid #e74a3b !important;
+    }
+
+    .card .border-left-secondary {
+        border-left: .25rem solid #858796 !important;
+    }
+
+    .card .border-left-dark {
+        border-left: .25rem solid #5a5c69 !important;
+    }
+
+    .text-gray-300 {
+        color: #dddfeb !important;
+    }
+</style>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Data from the backend
+            const userRoleData = JSON.parse('@Html.Raw(ViewData["UserRoleDataJson"])');
+            const tokensData = JSON.parse('@Html.Raw(ViewData["TokensDataJson"])');
+            const recommendationsData = JSON.parse('@Html.Raw(ViewData["RecommendationsDataJson"])');
+
+            // User Roles Doughnut Chart
+            new Chart(document.getElementById('userRolesChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: userRoleData.Labels,
+                    datasets: [{
+                        label: 'Users',
+                        data: userRoleData.Data,
+                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Token Chart
+            new Chart(document.getElementById('tokensChart'), {
+                type: 'line',
+                data: {
+                    labels: tokensData.Labels,
+                    datasets: [{
+                        label: 'API Tokens Used',
+                        data: tokensData.Data,
+                        fill: true,
+                        borderColor: 'rgb(246, 194, 62)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Recommendations Line Chart
+            new Chart(document.getElementById('recommendationsChart'), {
+                type: 'line',
+                data: {
+                    labels: recommendationsData.Labels,
+                    datasets: [{
+                        label: 'Recommendations Created',
+                        data: recommendationsData.Data,
+                        fill: true,
+                        borderColor: 'rgb(78, 115, 223)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}
