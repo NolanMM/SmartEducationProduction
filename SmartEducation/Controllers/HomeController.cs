@@ -1,21 +1,31 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using SmartEducation.Models;
+using Microsoft.EntityFrameworkCore;
+using SmartEducation.dbContext;
+using SmartEducation.ViewModels;
 
 namespace SmartEducation.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly SmartEduDbContext _context;
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    
+    public HomeController(ILogger<HomeController> logger, SmartEduDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    public IActionResult Index()
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var viewModel = new StandardViewModel
+        {
+            GradeStandards = await _context.NGSS_Standard.ToListAsync(),
+            NgssDetailedStandards = await _context.NGSS_Detailed_Standard.ToListAsync()
+        };
+        return View(viewModel);
     }
 
     public IActionResult Privacy()

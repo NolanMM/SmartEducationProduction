@@ -15,7 +15,7 @@
     {
         <div class="text-center">
             <p>You have not generated any recommendations yet.</p>
-            <a asp-action="Index" class="btn btn-primary">Get your first recommendation!</a>
+            <a asp-action="Index" class="btn btn-primary bg-black" style="border-color:black; padding: 20px">Get your first recommendation!</a>
         </div>
     }
     else
@@ -24,7 +24,7 @@
             @foreach (var item in Model)
             {
                 <a asp-action="Details" asp-route-id="@item.Id" class="list-group-item list-group-item-action flex-column align-items-start mb-2 border-0 rounded-lg">
-                    <h5 class="mb-1 text-muted pb-2"><em>Prompt: "@item.UserPrompt"</em></h5>
+                    <h5 class="mb-1 text-muted pb-2"><em>@item.NameOfActivity</em></h5>
                     <div class="row g-0 align-items-start mb-2 pb-2">
                         <div class="col">
                             <p class="mb-0">@item.Summary</p>
@@ -38,9 +38,9 @@
                         <div class="col">
                             <p><b>Number of tokens:</b> @item.TotalTokens</p>
                         </div>
-                        <div class="col-auto ps-3">
-                            <p><b>Education Standard:</b> @item.EducationStandards[0]</p>
-                        </div>
+                        @* <div class="col-auto ps-3"> *@
+                        @*     <p><b>Education Standard:</b> @item.EducationStandards[0]</p> *@
+                        @* </div> *@
                     </div>
                 </a>
                 <br />

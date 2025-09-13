@@ -65,7 +65,7 @@ namespace SmartEducation.Services
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
         }
 
-        public async Task<List<ActivityRecommendation>> GetActivityRecommendationsAsync(string userPrompt, User user_requested)
+        public async Task<List<ActivityRecommendation>> GetActivityRecommendationsAsync(string userPrompt, User user_requested, string userOriginalPrompt)
         {
             //Console.WriteLine("\nGenerating activity recommendations...");
 
@@ -109,7 +109,7 @@ namespace SmartEducation.Services
                     foreach (var recommendation_item in list_recommendations.List_Activities_Recommendation)
                     {
                         // Attach request context
-                        recommendation_item.UserPrompt = userPrompt;
+                        recommendation_item.UserPrompt = userOriginalPrompt;
                         // Stamp timestamps
                         var now_item = DateTime.UtcNow;
                         recommendation_item.CreatedAt = now_item;
@@ -137,7 +137,7 @@ namespace SmartEducation.Services
             {
                 var recommendation = JsonSerializer.Deserialize<ActivityRecommendation>(content);
 
-                recommendation.UserPrompt = userPrompt;
+                recommendation.UserPrompt = userOriginalPrompt;
 
                 // Stamp timestamps
                 var now_single = DateTime.UtcNow;

@@ -1,4 +1,4 @@
-namespace SmartEducation.Models
+﻿namespace SmartEducation.ViewModels
 {
     public class ErrorViewModel
     {

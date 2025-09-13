@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SmartEducation.Models
+namespace SmartEducation.ViewModels
 {
     public class RegisterViewModel
     {
@@ -20,5 +20,13 @@ namespace SmartEducation.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string? ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Please enter your first name.")]
+        [Display(Name = "First Name")]
+        public string? First_Name { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name.")]
+        [Display(Name = "Last Name")]
+        public string? Last_Name { get; set; }
     }
 }

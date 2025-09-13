@@ -1,0 +1,55 @@
+﻿@model VerifyOtpViewModel
+
+@{
+    ViewBag.Title = "Verify Your Account";
+}
+
+<div class="bg-body-tertiary">
+    <div class="container d-flex flex-column justify-content-center min-vh-90 py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="card shadow-lg border-0 rounded-4 fade-in-card">
+                    <div class="card-header bg-white text-center py-4 border-0">
+                        <i class="bi bi-shield-lock-fill fs-1 text-dark"></i>
+                        <h1 class="fw-light mt-2 pt-3 mb-0">Enter Verification Code</h1>
+                    </div>
+
+                    <div class="card-body pb-4 p-md-5">
+                        <p class="text-center text-muted mb-4">
+                            A 6-digit verification code has been sent to your email address: <strong>@Model.Email</strong>
+                        </p>
+
+                        <form method="post" asp-controller="Account" asp-action="VerifyOtp">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-3 text-center" role="alert"></div>
+
+                            <input type="hidden" asp-for="Email" />
+
+                            <div class="form-floating mb-4">
+                                <input asp-for="OtpCode" class="form-control text-center fs-4" placeholder="000000" maxlength="6" autofocus required>
+                                <label asp-for="OtpCode"></label>
+                                <span asp-validation-for="OtpCode" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-dark btn-lg fw-semibold py-2">Verify & Create Account</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer text-center bg-white py-3 border-0">
+                        <small>
+                            Didn't receive a code? <a asp-action="Register" style="color:black">Go back and try again</a>.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

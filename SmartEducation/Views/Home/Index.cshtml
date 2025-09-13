@@ -1,6 +1,20 @@
-﻿@{
+﻿@model StandardViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<style>
+    .standard-card, .ngss-list-item {
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+        .standard-card:hover, .ngss-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+</style>
 
 <div class="container-fluid px-4 py-5 text-center bg-body-tertiary">
     <h1 class="display-4 fw-bold py-5">Smarter Education, Brighter Futures</h1>
@@ -98,6 +112,68 @@
     </div>
 </div>
 
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-6">Grade Standards</h1>
+    </div>
+    <hr />
+
+    <div class="row pt-4">
+        @foreach (var item in Model.GradeStandards)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 standard-card"
+                     data-bs-toggle="modal"
+                     data-bs-target="#detailsModal"
+                     data-url="@Url.Action("GetGradeStandardDetails", "Standard", new { id = item.Id })">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title_Grade_Standard</h5>
+                        <p class="card-text text-truncate">@item.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr class="my-5" />
+    <div class="text-center mb-5">
+        <h1 class="display-6">NGSS Detailed Standards</h1>
+    </div>
+    <hr />
+    <div class="list-group pt-4">
+        @foreach (var item in Model.NgssDetailedStandards)
+        {
+            <a href="#" class="list-group-item list-group-item-action ngss-list-item"
+               data-bs-toggle="modal"
+               data-bs-target="#detailsModal"
+               data-url="@Url.Action("GetNgssDetailedStandardDetails", "Standard", new { id = item.Id })">
+                @item.Title_NGSS_Standard
+            </a>
+        }
+    </div>
+</div>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">Standard Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="detailsModalBody">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container py-5">
     <div class="text-center mb-5">
         <h2 class="fw-light">What Our Users Are Saying</h2>
@@ -148,3 +224,26 @@
         <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg mt-3 bg-black" style="border-color:black">Sign Up For Free</a>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Handles loading content into the modal
+            $('#detailsModal').on('show.bs.modal', function (event) {
+                var triggerElement = $(event.relatedTarget); // Element that triggered the modal
+                var url = triggerElement.data('url'); // Extract URL from data-url attribute
+                var modalBody = $('#detailsModalBody');
+
+                // Show a loading spinner
+                modalBody.html('<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+
+                // Load content from the server
+                modalBody.load(url, function (response, status, xhr) {
+                    if (status == "error") {
+                        modalBody.html("<p>Sorry, but there was an error loading the details. Please try again.</p>");
+                    }
+                });
+            });
+        });
+    </script>
+}

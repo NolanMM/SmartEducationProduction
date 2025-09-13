@@ -1,14 +1,13 @@
 ﻿@model RegisterViewModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Create Account";
 }
 
 <div class="bg-body-tertiary">
     <div class="container d-flex flex-column justify-content-center min-vh-90 py-5">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
-
                 <div class="card shadow-lg border-0 rounded-4 fade-in-card">
                     <div class="card-header bg-white text-center py-4 border-0">
                         <i class="bi bi-person-plus-fill fs-1 text-dark"></i>
@@ -17,7 +16,20 @@
 
                     <div class="card-body pb-4 p-md-5">
                         <form method="post" asp-controller="Account" asp-action="Register">
+                            @Html.AntiForgeryToken()
                             <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="First_Name" class="form-control" placeholder="First Name" required>
+                                <label asp-for="First_Name"></label>
+                                <span asp-validation-for="First_Name" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="Last_Name" class="form-control" placeholder="Last Name" required>
+                                <label asp-for="Last_Name"></label>
+                                <span asp-validation-for="Last_Name" class="text-danger small"></span>
+                            </div>
 
                             <div class="form-floating mb-3">
                                 <input asp-for="Email" class="form-control" placeholder="Email" required>
@@ -49,8 +61,13 @@
                         </small>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

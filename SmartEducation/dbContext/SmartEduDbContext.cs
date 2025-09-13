@@ -10,6 +10,7 @@ namespace SmartEducation.dbContext
     {
         public DbSet<ActivityRecommendation> ActivityRecommendations { get; set; }
         public DbSet<NGSS_Detailed_Standard> NGSS_Detailed_Standard { get; set; }
+        public DbSet<OtpVerification> OtpVerifications { get; set; }
         public DbSet<Grade_Standards> NGSS_Standard { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Kid> Kids { get; set; }
@@ -83,6 +84,10 @@ namespace SmartEducation.dbContext
                 .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Grade_Standards>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<OtpVerification>()
                 .Property(e => e.Id)
                 .ValueGeneratedOnAdd();
         }

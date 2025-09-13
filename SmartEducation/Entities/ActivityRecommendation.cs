@@ -13,50 +13,53 @@ namespace SmartEducation.Entities
 
         // --- Request Information ---
         [JsonIgnore]
-        public string UserPrompt { get; set; }
+        public string UserPrompt { get; set; } = new string("");
 
         [JsonIgnore]
         public DateTime DateTimeRequest { get; set; } = DateTime.UtcNow;
 
         // --- Core Content (mirrors the DTO) ---
+        [JsonPropertyName("Name_of_Activity")]
+        public string? NameOfActivity { get; set; } = new string("");
+
         [JsonPropertyName("Summary")]
-        public string Summary { get; set; }
+        public string Summary { get; set; } = new string("");
 
         [JsonPropertyName("Engineer_Connection")]
-        public string EngineerConnection { get; set; }
+        public string EngineerConnection { get; set; } = new string("");
 
         [JsonPropertyName("Learning_Objectives")]
-        public List<string> LearningObjectives { get; set; }
+        public List<string> LearningObjectives { get; set; } = new List<string>();
 
         [JsonPropertyName("Education_Standards")]
-        public List<string> EducationStandards { get; set; }
+        public List<string> EducationStandards { get; set; } = new List<string>();
 
         [JsonPropertyName("Material_Lists")]
-        public List<string> MaterialLists { get; set; }
+        public List<string> MaterialLists { get; set; } = new List<string>();
 
         [JsonPropertyName("Worksheets_and_Attachments")]
-        public List<string> WorksheetsAndAttachments { get; set; }
+        public List<string> WorksheetsAndAttachments { get; set; } = new List<string>();
 
         [JsonPropertyName("Introduction_Motivation")]
-        public string IntroductionMotivation { get; set; }
+        public string IntroductionMotivation { get; set; } = new string("");
 
         [JsonPropertyName("Procedure")]
-        public List<string> Procedure { get; set; }
+        public List<string> Procedure { get; set; } = new List<string>();
 
         [JsonPropertyName("Assessments")]
-        public List<string> Assessments { get; set; }
+        public List<string> Assessments { get; set; } = new List<string>();
 
         [JsonPropertyName("Safety_Issues")]
-        public string SafetyIssues { get; set; }
+        public string SafetyIssues { get; set; } = new string("");
 
         [JsonPropertyName("Troubleshooting_Tips")]
-        public List<string> TroubleshootingTips { get; set; }
+        public List<string> TroubleshootingTips { get; set; } = new List<string>();
 
         [JsonPropertyName("Activity_Extensions")]
-        public List<string> ActivityExtensions { get; set; }
+        public List<string> ActivityExtensions { get; set; } = new List<string>();
 
         [JsonPropertyName("Activity_Scaling")]
-        public List<string> ActivityScaling { get; set; }
+        public List<string> ActivityScaling { get; set; } = new List<string>();
 
         // --- Token usage ---
         [JsonIgnore]

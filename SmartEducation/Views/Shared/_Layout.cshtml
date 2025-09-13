@@ -65,16 +65,16 @@
                         @if (_signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="ActivityRecommendation" asp-action="Index">| Activity Recommendation</a>
+                                <a class="nav-link text-dark" asp-controller="ActivityRecommendation" asp-action="Index">| Lesson Plan Recommendation</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="ActivityRecommendation" asp-action="History">| Activity Recommendation History</a>
+                                <a class="nav-link text-dark" asp-controller="ActivityRecommendation" asp-action="History">| Lesson Plan Recommendation History</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Standard" asp-action="Index">| Standards</a>
-                            </li>
+                            @* <li class="nav-item"> *@
+                            @*     <a class="nav-link text-dark" asp-controller="Standard" asp-action="Index">| Standards</a> *@
+                            @* </li> *@
 
                             @if (User.IsInRole("Admin"))
                             {

@@ -40,7 +40,7 @@ builder.Services.AddSession(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<ChatGptService>();
 builder.Services.AddSingleton<ActivityRecommendationService>();
 builder.Services.AddScoped<IGradeStandardService, GradeStandardService>();
 builder.Services.AddScoped<IDetailedNGSSStandardService, DetailedNGSSStandardService>();
